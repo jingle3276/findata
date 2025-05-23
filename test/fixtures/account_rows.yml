@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  account_number: MyString
+  account_name: MyString
+  symbol: MyString
+  quatity: 1
+  last_price: 1.5
+  current_value: 1.5
+  total_gain_loss_percent: 1.5
+  cost_basis_total: 1.5
+
+two:
+  account_number: MyString
+  account_name: MyString
+  symbol: MyString
+  quatity: 1
+  last_price: 1.5
+  current_value: 1.5
+  total_gain_loss_percent: 1.5
+  cost_basis_total: 1.5

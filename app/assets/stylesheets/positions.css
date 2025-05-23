@@ -1,0 +1,38 @@
+.sort-link {
+  cursor: pointer;
+}
+
+.sort-link:hover {
+  text-decoration: none;
+  color: #0056b3;
+}
+
+.sort-icon {
+  margin-left: 5px;
+}
+
+th .fas {
+  font-size: 0.8em;
+  vertical-align: middle;
+  margin-left: 4px;
+}
+
+/* Highlight sorted column */
+th.sorted {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Add pointer cursor to sortable headers */
+th a {
+  cursor: pointer;
+}
+
+/* Style for the sort icons */
+.fa-sort {
+  color: #ccc;
+}
+
+.fa-sort-up,
+.fa-sort-down {
+  color: #007bff;
+} 

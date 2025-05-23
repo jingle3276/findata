@@ -1,0 +1,47 @@
+<tr class="position-row" 
+    data-position-id="<%= position.id %>"
+    data-controller="position"
+    data-position-data-value="<%= position.to_json %>">
+  <td class="text-left font-weight-bold align-middle">
+    <%= position.symbol %>
+  </td>
+  <td class="text-left align-middle">
+    <div class="font-weight-medium"><%= position.account_name %></div>
+    <small class="text-muted"><%= position.account_number %></small>
+  </td>
+  <td class="text-right align-middle">
+    <%= number_with_delimiter(position.quatity) %>
+  </td>
+  <td class="text-right align-middle">
+    <%= number_to_currency(position.last_price, precision: 2) %>
+  </td>
+  <td class="text-right align-middle">
+    <%= number_to_currency(position.current_value, precision: 2) %>
+  </td>
+  <td class="text-right align-middle <%= position.total_gain_loss_percent&.positive? ? 'text-success' : 'text-danger' %>">
+    <%= number_to_percentage(position.total_gain_loss_percent, precision: 2) %>
+  </td>
+  <td class="text-right align-middle">
+    <%= number_to_currency(position.cost_basis_total, precision: 2) %>
+  </td>
+  <td class="text-center align-middle">
+    <%= position.date&.strftime('%Y-%m-%d') %>
+  </td>
+  <td class="text-center align-middle">
+    <%= position.maturity_date&.strftime('%Y-%m-%d') %>
+  </td>
+  <td class="text-center align-middle">
+    <div class="btn-group btn-group-sm">
+      <%= link_to edit_position_path(position), class: 'btn btn-primary', title: 'Edit' do %>
+        <i class="fas fa-edit"></i>
+      <% end %>
+      <%= link_to position, 
+          method: :delete, 
+          class: 'btn btn-danger',
+          data: { confirm: 'Are you sure?' },
+          title: 'Delete' do %>
+        <i class="fas fa-trash"></i>
+      <% end %>
+    </div>
+  </td>
+</tr> 

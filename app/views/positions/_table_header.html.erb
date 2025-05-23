@@ -1,0 +1,25 @@
+<tr>
+  <th class="text-left" style="width: 10%">Symbol</th>
+  <th class="text-left" style="width: 15%">Account</th>
+  <th class="text-right" style="width: 8%">Quantity</th>
+  <th class="text-right" style="width: 10%">Last Price</th>
+  <th class="text-right" style="width: 12%">Current Value</th>
+  <th class="text-right" style="width: 10%">Gain/Loss %</th>
+  <th class="text-right" style="width: 12%">Cost Basis</th>
+  <th class="text-center" style="width: 8%">Date</th>
+  <th class="text-center" style="width: 8%">
+    <%= link_to positions_path(
+          sort: 'maturity_date',
+          sort_direction: (params[:sort] == 'maturity_date' && params[:sort_direction] == 'asc') ? 'desc' : 'asc'
+        ),
+        class: "text-dark text-decoration-none" do %>
+      Maturity
+      <% if params[:sort] == 'maturity_date' %>
+        <i class="fas <%= params[:sort_direction] == 'asc' ? 'fa-sort-down' : 'fa-sort-up' %>"></i>
+      <% else %>
+        <i class="fas fa-sort text-muted"></i>
+      <% end %>
+    <% end %>
+  </th>
+  <th class="text-center" style="width: 7%">Actions</th>
+</tr> 
