@@ -1,13 +1,6 @@
 <tr>
-  <th class="text-left" style="width: 10%">Symbol</th>
-  <th class="text-left" style="width: 15%">Account</th>
-  <th class="text-right" style="width: 8%">Quantity</th>
-  <th class="text-right" style="width: 10%">Last Price</th>
-  <th class="text-right" style="width: 12%">Current Value</th>
-  <th class="text-right" style="width: 10%">Gain/Loss %</th>
-  <th class="text-right" style="width: 12%">Cost Basis</th>
-  <th class="text-center" style="width: 8%">Date</th>
-  <th class="text-center" style="width: 8%">
+  <th class="text-start col-1">Symbol</th>
+  <th class="text-center col-1">
     <%= link_to positions_path(
           sort: 'maturity_date',
           sort_direction: (params[:sort] == 'maturity_date' && params[:sort_direction] == 'asc') ? 'desc' : 'asc'
@@ -21,5 +14,11 @@
       <% end %>
     <% end %>
   </th>
-  <th class="text-center" style="width: 7%">Actions</th>
-</tr> 
+  <th class="text-start col-1">Account</th>
+  <th class="text-end col-1">Quantity</th>
+  <th class="text-end col-1">Last Price</th>
+  <th class="text-end col-2">Current Value</th>
+  <th class="text-end col-1">Gain/Loss %</th>
+  <th class="text-end col-2">Cost Basis</th>
+  <th class="text-center col-1">Date</th>
+</tr>
