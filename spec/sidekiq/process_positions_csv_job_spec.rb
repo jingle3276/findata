@@ -48,5 +48,37 @@ RSpec.describe ProcessPositionsCsvJob, type: :job do
         cost_basis_total: 2030.20
       )
     end
+
+    it 'updates existing positions instead of creating duplicates' do
+      # First clear any existing positions
+      Position.delete_all
+
+      # Create an existing position
+      existing = Position.create!(
+        account_number: 'A10000001',
+        account_name: 'Individual Account',
+        symbol: '912833LV0',
+        quantity: 70000.0,
+        last_price: 98.0,
+        current_value: 70000.0,
+        total_gain_loss_percent: 0.0,
+        cost_basis_total: 70000.0,
+        date: Date.yesterday
+      )
+
+      expect {
+        described_class.new.perform(csv_file_path.to_s)
+      }.to change(Position, :count).by(15) # 16 total positions - 1 existing
+
+      # Reload the position and verify it was updated
+      existing.reload
+      expect(existing).to have_attributes(
+        quantity: 75000.0,
+        last_price: 99.729,
+        current_value: 74796.75,
+        total_gain_loss_percent: 0.10,
+        cost_basis_total: 74716.87
+      )
+    end
   end
 end
