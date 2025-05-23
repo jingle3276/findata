@@ -80,5 +80,25 @@ RSpec.describe ProcessPositionsCsvJob, type: :job do
         cost_basis_total: 74716.87
       )
     end
+
+    it 'extracts maturity dates from descriptions' do
+      described_class.new.perform(csv_file_path.to_s)
+
+      # Test zero coupon treasury
+      zero_coupon = Position.find_by(symbol: '912833LV0')
+      expect(zero_coupon.maturity_date).to eq(Date.new(2025, 5, 15))
+
+      # Test regular treasury note
+      treasury_note = Position.find_by(symbol: '91282CMU2')
+      expect(treasury_note.maturity_date).to eq(Date.new(2030, 3, 31))
+
+      # Test treasury bond
+      treasury_bond = Position.find_by(symbol: '912810UJ5')
+      expect(treasury_bond.maturity_date).to eq(Date.new(2045, 2, 15))
+
+      # Test money market (should have no maturity)
+      money_market = Position.find_by(symbol: 'SPAXX**')
+      expect(money_market.maturity_date).to be_nil
+    end
   end
 end

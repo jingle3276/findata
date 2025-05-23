@@ -5,6 +5,9 @@ class ProcessPositionsCsvJob
     require "csv"
 
     CSV.foreach(csv_file_path, headers: true) do |row|
+      # Skip rows without required fields
+      next if row["Account Number"].blank? || row["Symbol"].blank?
+
       # First try to find an existing position
       position = Position.find_or_initialize_by(
         account_number: row["Account Number"],
@@ -19,10 +22,10 @@ class ProcessPositionsCsvJob
         current_value: parse_currency(row["Current Value"]),
         total_gain_loss_percent: parse_percentage(row["Total Gain/Loss Percent"]),
         cost_basis_total: parse_currency(row["Cost Basis Total"]),
+        maturity_date: extract_maturity_date(row["Description"]),
         date: Date.today
       )
 
-      # Save the position (will update if exists, create if new)
       position.save!
     end
   rescue StandardError => e
@@ -31,6 +34,17 @@ class ProcessPositionsCsvJob
   end
 
   private
+
+  def extract_maturity_date(description)
+    return nil if description.blank?
+
+    # Match patterns like "05/15/2025" or "02/15/2045"
+    if match = description.match(%r{(\d{2}/\d{2}/\d{4})}i)
+      Date.strptime(match[1], "%m/%d/%Y")
+    else
+      nil
+    end
+  end
 
   def parse_number(value)
     return nil if value.blank?
