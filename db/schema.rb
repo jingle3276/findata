@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_17_221308) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_22_232246) do
   create_table "positions", force: :cascade do |t|
     t.string "account_number"
     t.string "account_name"
     t.string "symbol"
-    t.integer "quatity"
+    t.integer "quantity"
     t.float "last_price"
     t.float "current_value"
     t.float "total_gain_loss_percent"

@@ -10,7 +10,7 @@
     <small class="text-muted"><%= position.account_number %></small>
   </td>
   <td class="text-right align-middle">
-    <%= number_with_delimiter(position.quatity) %>
+    <%= number_with_delimiter(position.quantity) %>
   </td>
   <td class="text-right align-middle">
     <%= number_to_currency(position.last_price, precision: 2) %>
@@ -44,4 +44,4 @@
       <% end %>
     </div>
   </td>
-</tr> 
+</tr>
