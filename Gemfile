@@ -60,7 +60,13 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+  gem "rspec-rails"
+  gem "factory_bot_rails"
+  gem "faker"
 end
+
+# Standard library gems that need explicit requiring in Ruby 3.4+
+gem "csv"
 
 # Redis and Sidekiq
 gem "redis", "~> 5.0"

@@ -18,4 +18,6 @@ Rails.application.routes.draw do
   root "positions#index"
 
   mount Sidekiq::Web => "/sidekiq"
+
+  resources :uploads, only: [ :index, :create ]
 end

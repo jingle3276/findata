@@ -1,0 +1,41 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h2>Upload Positions CSV</h2>
+        </div>
+        <div class="card-body">
+          <%= form_with(url: uploads_path, method: :post, local: true, multipart: true, class: "mb-3") do |f| %>
+            <div class="mb-3">
+              <%= f.label :file, "Select CSV file", class: "form-label" %>
+              <%= f.file_field :file, accept: '.csv', class: "form-control" %>
+            </div>
+            
+            <%= f.submit "Upload and Process", class: "btn btn-primary" %>
+            <%= link_to "Back to Positions", positions_path, class: "btn btn-outline-secondary ms-2" %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="card mt-4">
+        <div class="card-header">
+          <h3>CSV Format Requirements</h3>
+        </div>
+        <div class="card-body">
+          <p>The CSV file should contain the following columns:</p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Account Number</li>
+            <li class="list-group-item">Account Name</li>
+            <li class="list-group-item">Symbol</li>
+            <li class="list-group-item">Quantity</li>
+            <li class="list-group-item">Last Price</li>
+            <li class="list-group-item">Current Value</li>
+            <li class="list-group-item">Total Gain/Loss Percent</li>
+            <li class="list-group-item">Cost Basis Total</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
