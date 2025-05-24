@@ -5,8 +5,9 @@ class ProcessPositionsCsvJob
     require "csv"
 
     CSV.foreach(csv_file_path, headers: true) do |row|
-      # Skip rows without required fields
+      # Skip rows without required fields or non-treasury positions
       next if row["Account Number"].blank? || row["Symbol"].blank?
+      next unless row["Symbol"].start_with?("912") # Only process US Treasury positions
 
       # First try to find an existing position
       position = Position.find_or_initialize_by(
