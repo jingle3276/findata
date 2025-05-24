@@ -3,12 +3,15 @@ class PositionsController < ApplicationController
 
   # GET /positions
   def index
-    @positions = Position.all
-    @positions = @positions.order(maturity_date: params[:sort_direction] || :asc) if params[:sort] == "maturity_date"
+    base_scope = Position.all
+    base_scope = base_scope.order(maturity_date: params[:sort_direction] || :asc) if params[:sort] == "maturity_date"
+
+    @active_positions = base_scope.where("maturity_date > ?", Date.current)
+    @matured_positions = base_scope.where("maturity_date <= ?", Date.current)
 
     respond_to do |format|
       format.html
-      format.json
+      format.json { render json: { active: @active_positions, matured: @matured_positions } }
     end
   end
 
