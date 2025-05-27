@@ -70,4 +70,4 @@ gem "csv"
 
 # Redis and Sidekiq
 gem "redis", "~> 5.0"
-gem "sidekiq", "~> 7.2"
+gem "sidekiq", "~> 8.0"
